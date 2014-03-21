@@ -35,7 +35,8 @@ class ADB(object):
     def pyadb_version(self):
         return self.PYAND_VERSION
 
-    def __init__(self, adb_path=None):
+    def __init__(self, adb_path="adb"):
+        #By default we assume adb is in PATH
         self.__adb_path = adb_path
 
     def __clean__(self):
@@ -110,7 +111,7 @@ class ADB(object):
 
     def check_path(self):
         """
-        Intuitive way to verify the ADB path
+        Verify if adb path works
         """
         if self.get_version() is None:
             return False

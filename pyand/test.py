@@ -1,5 +1,5 @@
 from pyand import ADB
-adb = ADB("adb")
-a = adb.get_version()
-print a
-
+adb = ADB()
+print adb.get_version()
+print adb.check_path()
+print adb.get_devices()
