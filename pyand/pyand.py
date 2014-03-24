@@ -16,7 +16,7 @@ except ImportError, e:
 
 class ADB(object):
 
-    PYAND_VERSION = "1.0"
+    PYAND_VERSION = "0.5"
 
     __adb_path = None
     __output = None
