@@ -1,8 +1,9 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 ####
 # Author: Edvard Holst
 # Project Site: http://github.com/Zyg0te/pyand
 ###
-
 try:
     import sys
     import subprocess
@@ -36,8 +37,10 @@ class ADB(object):
         return self.PYAND_VERSION
 
     def __init__(self, adb_path="adb"):
-        #By default we assume adb is in PATH
+        #By default we assume adb is in $PATH
         self.__adb_path = adb_path
+        if not self.check_path():
+            self.__error = "[!] adb path not valid"
 
     def __clean__(self):
         self.__output = None
@@ -55,10 +58,14 @@ class ADB(object):
             ret = None
 
         return ret
-    def __build_command__(self,cmd):
+
+    def __build_command__(self, cmd):
+        """
+        Build command parameters
+        """
         if self.__devices is not None and len(self.__devices) > 1 and self.__target is None:
-            self.__error = "Must set target device first"
-            #return None
+            self.__error = "[!] Must set target device first"
+            return None
 
         if type(cmd) is tuple:
             a = list(cmd)
@@ -68,7 +75,9 @@ class ADB(object):
             a = [cmd]
         a.insert(0, self.__adb_path)
         if self.__target is not None:
-            a.insert(1, ['-s', self.__target])
+            # add target device arguments to the command
+            a.insert(1, '-s')
+            a.insert(2, self.__target)
 
         return a
 
@@ -79,8 +88,8 @@ class ADB(object):
         self.__clean__()
 
         if self.__adb_path is None:
-            self.__error = "ADB path not set"
-            return
+            self.__error = "[!] ADB path not set"
+            return False
 
         try:
             args = self.__build_command__(cmd)
@@ -90,7 +99,6 @@ class ADB(object):
             cmdp = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             self.__output, self.__error = cmdp.communicate()
             retcode = cmdp.wait()
-          
             return self.__output
         except OSError, e:
             self.__error = str(e)
@@ -111,27 +119,31 @@ class ADB(object):
 
     def check_path(self):
         """
-        Verify if adb path works
+        Verify if adb path is valid
         """
+
         if self.get_version() is None:
+            print "[-] adb executable not found"
             return False
+        print "[+] adb executable found"
         return True
 
     def set_adb_path(self,adb_path):
         """
-        Set ADB tool path
+        Set the ADB tool path
         """
         self.__adb_path = adb_path
+        self.check_path()
 
     def get_adb_path(self):
         """
-        Returns ADB tool path
+        Returns the ADB tool path
         """
         return self.__adb_path
 
     def start_server(self):
         """
-        Starts ADB server
+        Starts the ADB server
         adb start-server
         """
         self.__clean__()
@@ -140,7 +152,7 @@ class ADB(object):
 
     def kill_server(self):
         """
-        Kills ADB server
+        Kills the ADB server
         adb kill-server
         """
         self.__clean__()
@@ -148,7 +160,7 @@ class ADB(object):
 
     def restart_server(self):
         """
-        Restarts ADB server
+        Restarts the ADB server
         """
         self.kill_server()
         return self.start_server()
@@ -164,7 +176,7 @@ class ADB(object):
 
     def wait_for_device(self):
         """
-        Block until device is online
+        Block operations until device is online
         adb wait-for-device
         """
         self.__clean__()
@@ -198,16 +210,17 @@ class ADB(object):
         except:
             self.__devices = None
             error = 1
-
         return (error,self.__devices)
 
     def set_target_device(self,device):
         """
-        Select the device to work with
+        Specify the device identifier to work with
+        example: set_target_device('emulator-5554')
         """
         self.__clean__()
         if device is None or not device in self.__devices:
             self.__error = 'Must get device list first'
+            print "[!] Device not found in device list"
             return False
         self.__target = device
         return True
