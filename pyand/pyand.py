@@ -101,6 +101,48 @@ class Fastboot(object):
         print "[+] fastboot executable found"
         return True
 
+    def set_fastboot_path(self,fastboot_path):
+        """
+        Set the Fastboot tool path
+        """
+        self.__fastboot_path = fastboot_path
+        self.check_path()
+
+    def get_fastboot_path(self):
+        """
+        Returns the Fastboot tool path
+        """
+        return self.__fastboot_path_path
+
+    def get_devices(self):
+        """
+        Return a list of connected devices in fastboot mode
+        fastboot devices
+        """
+        error = 0
+        self.run_cmd("devices")
+        if self.__error is not None:
+            return ''
+        try:
+            self.__devices = self.__output.partition('\n')[2].replace('device','').split()
+
+            if self.__devices[1:] == ['no','permissions']:
+                error = 2
+                self.__devices = None
+        except:
+            self.__devices = None
+            error = 1
+        return (error,self.__devices)
+
+    def flash_all(self, wipe=False):
+        """
+        flash boot + recovery + system. Optionally wipe everything
+        """
+        if wipe:
+            self.run_cmd('-w flashall')
+        else:
+            self.run_cmd('flashall')
+
 
 class ADB(object):
 
