@@ -557,4 +557,3 @@ class ADB(object):
             self.__output = self.__output.strip()
 
         return self.__output
-
