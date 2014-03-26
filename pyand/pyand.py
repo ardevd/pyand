@@ -10,7 +10,7 @@ try:
     from os import popen3 as pipe
 except ImportError, e:
     # should never be reached
-    print "[f] Required module missing. %s" % e.args[0]
+    print "[!] Required module missing. %s" % e.args[0]
     sys.exit(-1)
 
 
@@ -385,7 +385,7 @@ class ADB(object):
     def reboot_device(self,mode=0):
         """
         Reboot the target device
-        Optionally, specify mode to reboot into recovery or bootloader
+        Specify mode to reboot normally or into recovery or bootloader
         adb reboot <recovery/bootloader>
         """
         self.__clean__()
@@ -393,6 +393,7 @@ class ADB(object):
         if not mode in (self.REBOOT_NORMAL, self.REBOOT_RECOVERY,self.REBOOT_BOOTLOADER):
             self.__error = "mode must be REBOOT_NORMAL/REBOOT_RECOVERY/REBOOT_BOOTLOADER"
             return self.__output
+
         cmd_str = "reboot"
         if mode == self.REBOOT_RECOVERY:
             cmd_str += " recovery"
@@ -556,7 +557,6 @@ class ADB(object):
             return self.__output
         self.run_cmd("forward %s %s" % (local,remote) )
         return self.__output
-
 
     def uninstall(self,package=None,keepdata=False):
         """
