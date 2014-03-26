@@ -155,6 +155,7 @@ class ADB(object):
     __target = None
 
     # reboot modes
+    REBOOT_NORMAL = 0
     REBOOT_RECOVERY = 1
     REBOOT_BOOTLOADER = 2
 
@@ -202,7 +203,9 @@ class ADB(object):
         elif type(cmd) is list:
             a = cmd
         else:
-            a = [cmd]
+            #All arguments must be single list items
+            a = cmd.split(" ")
+
         a.insert(0, self.__adb_path)
         if self.__target is not None:
             # add target device arguments to the command
@@ -379,16 +382,24 @@ class ADB(object):
         self.run_cmd('get-serialno')
         return self.__output
 
-    def reboot_device(self,mode):
+    def reboot_device(self,mode=0):
         """
         Reboot the target device
-        adb reboot recovery/bootloader
+        Optionally, specify mode to reboot into recovery or bootloader
+        adb reboot <recovery/bootloader>
         """
         self.__clean__()
-        if not mode in (self.REBOOT_RECOVERY,self.REBOOT_BOOTLOADER):
-            self.__error = "mode must be REBOOT_RECOVERY/REBOOT_BOOTLOADER"
+
+        if not mode in (self.REBOOT_NORMAL, self.REBOOT_RECOVERY,self.REBOOT_BOOTLOADER):
+            self.__error = "mode must be REBOOT_NORMAL/REBOOT_RECOVERY/REBOOT_BOOTLOADER"
             return self.__output
-        self.run_cmd("reboot %s" % "recovery" if mode == self.REBOOT_RECOVERY else "bootloader")
+        cmd_str = "reboot"
+        if mode == self.REBOOT_RECOVERY:
+            cmd_str += " recovery"
+        elif mode == self.REBOOT_BOOTLOADER:
+            cmd_str += " bootloader"
+
+        self.run_cmd(cmd_str)
         return self.__output
 
     def set_adb_root(self,mode):
