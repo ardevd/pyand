@@ -1,11 +1,12 @@
 try:
     import sys
     import subprocess
-    from os import popen3 as pipe
+
 except ImportError, e:
     # should never be reached
     print "[!] Required module missing. %s" % e.args[0]
     sys.exit(-1)
+
 
 class ADB(object):
 
@@ -24,7 +25,6 @@ class ADB(object):
     DEFAULT_TCP_PORT = 5555
     # default TCP/IP host
     DEFAULT_TCP_HOST = "localhost"
-
 
     def __init__(self, adb_path="adb"):
         #By default we assume adb is in $PATH
@@ -87,6 +87,7 @@ class ADB(object):
             args = self.__build_command__(cmd)
             if args is None:
                 return
+            #Print out args for debug purposes
             print 'args>', args
             cmdp = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             self.__output, self.__error = cmdp.communicate()
@@ -231,7 +232,7 @@ class ADB(object):
             print "[!] Device not found in device list"
             return False
         self.__target = self.__devices[0]
-        return True
+        return "[+] Target device set: %s" % self.get_target_device()
 
     def get_target_device(self):
         """

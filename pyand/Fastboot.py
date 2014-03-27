@@ -111,25 +111,58 @@ class Fastboot(object):
 
     def get_devices(self):
         """
-        Return a list of connected devices in fastboot mode
+        Return a dictionary of fastboot connected devices along with an incremented Id.
         fastboot devices
         """
         error = 0
+        #Clear existing list of devices
+        self.__devices = None
         self.run_cmd("devices")
         if self.__error is not None:
             return ''
         try:
-            self.__devices = self.__output.partition('\n')[2].replace('device', '').split()
+            device_list = self.__output.partition('\n')[2].replace('device','').split()
 
-            if self.__devices[1:] == ['no', 'permissions']:
+            if device_list[1:] == ['no','permissions']:
                 error = 2
-                print "[-] fastboot permission error"
                 self.__devices = None
         except:
             self.__devices = None
             error = 1
+        #return (error,self.__devices)
+        i = 0
+        device_dict =  {}
+        for device in device_list:
+            #Add list to dictionary with incrementing ID
+            device_dict[i] = device
+            i += 1
+        self.__devices = device_dict
+        return self.__devices
 
-        return (error,self.__devices)
+    def set_target_by_name(self, device):
+        """
+        Specify the device name to target
+        example: set_target_device('emulator-5554')
+        """
+        if device is None or not device in self.__devices.values():
+
+            self.__error = 'Must get device list first'
+            print "[!] Device not found in device list"
+            return False
+        self.__target = device
+        return True
+
+    def set_target_by_id(self, device):
+        """
+        Specify the device ID to target.
+        The ID should be one from the device list.
+        """
+        if device is None or not device in self.__devices:
+            self.__error = 'Must get device list first'
+            print "[!] Device not found in device list"
+            return False
+        self.__target = self.__devices[0]
+        return True
 
     def flash_all(self, wipe=False):
         """
