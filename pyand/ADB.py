@@ -220,8 +220,7 @@ class ADB(object):
             print "[!] Device not found in device list"
             return False
         self.__target = device
-        return True
-
+        return "[+] Target device set: %s" % self.get_target_device()
     def set_target_by_id(self, device):
         """
         Specify the device ID to target.
