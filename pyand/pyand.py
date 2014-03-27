@@ -250,7 +250,7 @@ class ADB(object):
             cmdp = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             self.__output, self.__error = cmdp.communicate()
             retcode = cmdp.wait()
-            return self.__output
+            return self.__output.rstrip('\n')
         except OSError, e:
             self.__error = str(e)
 
@@ -340,7 +340,7 @@ class ADB(object):
 
     def get_devices(self):
         """
-        Return a list of connected devices
+        Return a dictionary of connected devices along with an incremented Id.
         adb devices
         """
         error = 0
@@ -350,32 +350,47 @@ class ADB(object):
         if self.__error is not None:
             return ''
         try:
-            self.__devices = self.__output.partition('\n')[2].replace('device','').split()
+            device_list = self.__output.partition('\n')[2].replace('device','').split()
 
-            if self.__devices[1:] == ['no','permissions']:
+            if device_list[1:] == ['no','permissions']:
                 error = 2
                 self.__devices = None
         except:
             self.__devices = None
             error = 1
         #return (error,self.__devices)
+        i = 0
+        device_dict =  {}
+        for device in device_list:
+            #Add list to dictionary with incrementing ID
+            device_dict[i] = device
+            i += 1
+        self.__devices = device_dict
         return self.__devices
 
-    def set_target_device(self,device):
+    def set_target_by_name(self, device):
         """
-        Specify the device identifier to work with
+        Specify the device name to target
         example: set_target_device('emulator-5554')
-        Alternatively, specify the list id to work with.
-        Currently this function will use simple methods
-        to guess whether you are specifying list id or
-        device identifier
         """
-        if device is None or not device in self.__devices:
+        if device is None or not device in self.__devices.values():
 
             self.__error = 'Must get device list first'
             print "[!] Device not found in device list"
             return False
         self.__target = device
+        return True
+
+    def set_target_by_id(self, device):
+        """
+        Specify the device ID to target.
+        The ID should be one from the device list.
+        """
+        if device is None or not device in self.__devices:
+            self.__error = 'Must get device list first'
+            print "[!] Device not found in device list"
+            return False
+        self.__target = self.__devices[0]
         return True
 
     def get_target_device(self):
@@ -389,11 +404,10 @@ class ADB(object):
 
     def get_state(self):
         """
-        Get ADB state
+        Get ADB state. Returns either offline | offline | device
         adb get-state
         """
-        self.run_cmd('get-state')
-        return self.__output
+        return self.run_cmd('get-state')
 
     def get_serialno(self):
         """
