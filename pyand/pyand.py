@@ -344,6 +344,8 @@ class ADB(object):
         adb devices
         """
         error = 0
+        #Clear existing list of devices
+        self.__devices = None
         self.run_cmd("devices")
         if self.__error is not None:
             return ''
