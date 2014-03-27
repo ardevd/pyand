@@ -276,7 +276,6 @@ class ADB(object):
         if self.get_version() is None:
             print "[-] adb executable not found"
             return False
-        print "[+] adb executable found"
         return True
 
     def set_adb_path(self,adb_path):
@@ -414,8 +413,7 @@ class ADB(object):
         Get serialno from target device
         adb get-serialno
         """
-        self.run_cmd('get-serialno')
-        return self.__output
+        return self.run_cmd('get-serialno')
 
     def reboot_device(self,mode=0):
         """
@@ -433,16 +431,14 @@ class ADB(object):
         elif mode == self.REBOOT_BOOTLOADER:
             cmd_str += " bootloader"
 
-        self.run_cmd(cmd_str)
-        return self.__output
+        return self.run_cmd(cmd_str)
 
-    def set_adb_root(self,mode):
+    def set_adb_root(self, mode):
         """
         restarts the adbd daemon with root permissions
         adb root
         """
-        self.run_cmd('root')
-        return self.__output
+        return self.run_cmd('root')
 
     def set_system_rw(self):
         """
@@ -508,8 +504,7 @@ class ADB(object):
         List PIDs of processes hosting a JDWP transport
         adb jdwp
         """
-        self.run_cmd("jdwp")
-        return self.__output
+        return self.run_cmd("jdwp")
 
     def get_logcat(self,lcfilter=""):
         """
