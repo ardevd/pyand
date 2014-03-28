@@ -1,8 +1,16 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+####
+# Author: Edvard Holst
+# Project Site: http://github.com/Zyg0te/pyand
+###
+
 try:
     import sys
     import subprocess
-
-except ImportError, e:
+    from os import popen3 as pipe
+except ImportError as e:
     # should never be reached
     print "[!] Required module missing. %s" % e.args[0]
     sys.exit(-1)
@@ -221,6 +229,7 @@ class ADB(object):
             return False
         self.__target = device
         return "[+] Target device set: %s" % self.get_target_device()
+
     def set_target_by_id(self, device):
         """
         Specify the device ID to target.
