@@ -22,7 +22,9 @@ pyand will eventually let you do pretty much anything you could possibly do with
 Requirements 
 =======
 * Python 2.7 is the recommended version of Python as Python 3.x is not currently supported.
-* Fastboot and ADB is also required and should ideally be in your $PATH. `The Android SDK https://developer.android.com/sdk/index.html?hl=sk`_ is a good way of getting a hold of up-to-date binaries.
+* Fastboot and ADB is also required and should ideally be in your $PATH. 
+  
+    * `The Android SDK <https://developer.android.com/sdk/index.html>`_ is a good way of getting a hold of up-to-date binaries.
 
 Credits
 ========
