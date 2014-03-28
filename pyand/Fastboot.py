@@ -53,7 +53,7 @@ class Fastboot(object):
             elif type(cmd) is list:
                 a = cmd
             else:
-                a = [cmd]
+                a = cmd.split(" ")
             a.insert(0, self.__fastboot_path)
             if self.__target is not None:
                 # add target device arguments to the command
@@ -150,7 +150,7 @@ class Fastboot(object):
             print "[!] Device not found in device list"
             return False
         self.__target = device
-        return True
+        return "[+] Target device set: %s" % self.get_target_device()
 
     def set_target_by_id(self, device):
         """
@@ -162,7 +162,7 @@ class Fastboot(object):
             print "[!] Device not found in device list"
             return False
         self.__target = self.__devices[0]
-        return True
+        return "[+] Target device set: %s" % self.get_target_device()
 
     def flash_all(self, wipe=False):
         """
