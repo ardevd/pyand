@@ -121,7 +121,7 @@ class Fastboot(object):
         if self.__error is not None:
             return ''
         try:
-            device_list = self.__output.partition('\n')[2].replace('device','').split()
+            device_list = self.__output.replace('fastboot','').split()
 
             if device_list[1:] == ['no','permissions']:
                 error = 2
@@ -161,8 +161,17 @@ class Fastboot(object):
             self.__error = 'Must get device list first'
             print "[!] Device not found in device list"
             return False
-        self.__target = self.__devices[0]
+        self.__target = self.__devices[device]
         return "[+] Target device set: %s" % self.get_target_device()
+
+    def get_target_device(self):
+        """
+        Returns the selected device to work with
+        """
+        if self.__target == None:
+            print "[*] No device target set"
+
+        return self.__target
 
     def flash_all(self, wipe=False):
         """

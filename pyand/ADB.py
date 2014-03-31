@@ -239,7 +239,7 @@ class ADB(object):
             self.__error = 'Must get device list first'
             print "[!] Device not found in device list"
             return False
-        self.__target = self.__devices[0]
+        self.__target = self.__devices[device]
         return "[+] Target device set: %s" % self.get_target_device()
 
     def get_target_device(self):
