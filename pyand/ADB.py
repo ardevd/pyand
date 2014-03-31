@@ -9,6 +9,7 @@
 try:
     import sys
     import subprocess
+    import re
     from os import popen3 as pipe
 except ImportError as e:
     # should never be reached
@@ -257,6 +258,27 @@ class ADB(object):
         adb get-state
         """
         return self.run_cmd('get-state')
+
+    def get_model(self):
+        """
+        Get Model name from taget device
+        """
+        self.run_cmd("devices -l")
+        device_model = ""
+        if self.__error is not None:
+            return self.__error
+        try:
+            for line in self.__output.split("\n"):
+                if line.startswith(self.__target):
+                    pattern = r"model:(.+)\sdevice"
+                    pat = re.compile(pattern)
+                    device_model = pat.findall(line)
+                    device_model = re.sub("[\[\]\'\{\}<>]", '', str(device_model))
+        except Exception as e:
+            return "[-] Error: %s" %e.args[0]
+
+        return device_model
+
 
     def get_serialno(self):
         """
