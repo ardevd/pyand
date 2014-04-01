@@ -6,6 +6,7 @@ pyand is a simple Python library for Python 2.7 that allows you to easily work w
 Existing Python modules for adb are somewhat outdated or broken, hence why I went ahead and wrote pyand. I also wanted more than just adb hence why I added in support for Fastboot as well. Usage is simple and should be pretty intuitive for anyone used to working with adb and fastboot.
 
 .. code-block:: pycon
+
     >>> from pyand import ADB, Fastboot
     >>> adb = ADB()
     >>> adb.get_devices()
@@ -22,6 +23,7 @@ Existing Python modules for adb are somewhat outdated or broken, hence why I wen
     >>> fb.get_devices()
     {0: 'abc1951124de1241'}
     ...
+
 
 pyand will eventually let you do pretty much anything you could possibly do with adb and fastboot, but its still under development and not entirely done yet. 
 
@@ -41,7 +43,7 @@ easy_install
 -------
 If you have easy_install for Python-2.7 installed, you can use it to install pyand pretty easily. 
 
-::
+.. code-block::
    $ git clone https://github.com/Zyg0te/pyand
    $ sudo easy_install-2.7 pyand
 
