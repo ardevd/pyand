@@ -1,7 +1,7 @@
 # Maintainer: Edvard Holst <edvard.holst at gmail> 
 pkgname=python2-pyand-git
-pkgver=20140401
-pkgrel=1
+pkgver=0.9.1.2
+pkgrel=2
 pkgdesc="A python wrapper library for ADB and Fastboot"
 arch=('any')
 url="https://github.com/Zyg0te/pyand"
