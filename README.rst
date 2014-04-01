@@ -41,7 +41,7 @@ easy_install
 -------
 If you have easy_install for Python-2.7 installed, you can use it to install pyand pretty easily. 
 
-.. code-block::
+::
    $ git clone https://github.com/Zyg0te/pyand
    $ sudo easy_install-2.7 pyand
 
