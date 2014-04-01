@@ -279,7 +279,6 @@ class ADB(object):
 
         return device_model
 
-
     def get_serialno(self):
         """
         Get serialno from target device
