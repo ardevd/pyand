@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = "pyand",
-    version = "0.9.1.1",
+    version = "0.9.1.2",
     author = "Edvard Holst",
     author_email = "edvard.holst@gmail.com",
     description = ("Python wrapper for ADB and Fastboot"),
