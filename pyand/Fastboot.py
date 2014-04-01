@@ -76,7 +76,7 @@ class Fastboot(object):
             args = self.__build_command__(cmd)
             if args is None:
                 return
-            print 'args>', args
+            #print 'args>', args
             cmdp = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             self.__output, self.__error = cmdp.communicate()
             retcode = cmdp.wait()

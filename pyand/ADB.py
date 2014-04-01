@@ -97,7 +97,7 @@ class ADB(object):
             if args is None:
                 return
             #Print out args for debug purposes
-            print 'args>', args
+            #print 'args>', args
             cmdp = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             self.__output, self.__error = cmdp.communicate()
             retcode = cmdp.wait()
