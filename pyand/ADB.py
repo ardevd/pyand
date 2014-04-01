@@ -289,8 +289,8 @@ class ADB(object):
     def reboot_device(self,mode=0):
         """
         Reboot the target device
-        Specify mode to reboot normally or into recovery or bootloader
-        adb reboot <recovery/bootloader>
+        Specify mode to reboot normally, recovery or bootloader
+        adb reboot <normally (0)/recovery (1) /bootloader (2)>
         """
         if not mode in (self.REBOOT_NORMAL, self.REBOOT_RECOVERY,self.REBOOT_BOOTLOADER):
             self.__error = "mode must be REBOOT_NORMAL/REBOOT_RECOVERY/REBOOT_BOOTLOADER"
@@ -452,7 +452,7 @@ class ADB(object):
         self.run_cmd(cmd)
         return self.__output
 
-    def install(self,fwdlock=False,reinstall=False,sdcard=False,pkgapp=None):
+    def install(self,pkgapp=None,fwdlock=False,reinstall=False,sdcard=False):
         """
         Push this package file to the device and install it
         adb install [-l] [-r] [-s] <file>
@@ -464,14 +464,14 @@ class ADB(object):
         if pkgapp is None:
             return self.__output
 
-        cmd = "install "
+        cmd = "install"
         if fwdlock is True:
-            cmd += "-l "
+            cmd += " -l "
         if reinstall is True:
-            cmd += "-r "
+            cmd += " -r "
         if sdcard is True:
-            cmd += "-s "
-
+            cmd += " -s "
+            
         self.run_cmd("%s %s" % (cmd , pkgapp) )
         return self.__output
 
