@@ -34,6 +34,10 @@ Requirements
   
     * `The Android SDK <https://developer.android.com/sdk/index.html>`_ is a good way of getting a hold of up-to-date binaries.
 
+Documentation
+====
+The Wiki will eventually be a good place to find documentation. 
+
 Installation
 ======
 There are currently two recommended ways of installing pyand.
