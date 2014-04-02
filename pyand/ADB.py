@@ -4,6 +4,7 @@
 ####
 # Author: Edvard Holst
 # Project Site: http://github.com/Zyg0te/pyand
+# Version: 0.9.1.2
 ###
 
 try:
@@ -114,10 +115,11 @@ class ADB(object):
         """
         ret = self.run_cmd("version")
         try:
-            ret = self.__output.split()[-1:][0]
+            pattern = re.compile(r"version\s(.+)")
+            version = pattern.findall(ret)[0]
         except:
-            ret = None
-        return ret
+            version = None
+        return version
 
     def check_path(self):
         """
@@ -471,7 +473,7 @@ class ADB(object):
             cmd += " -r "
         if sdcard is True:
             cmd += " -s "
-            
+
         self.run_cmd("%s %s" % (cmd , pkgapp) )
         return self.__output
 
