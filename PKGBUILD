@@ -21,6 +21,9 @@ pkgver() {
 }
 
 package() {
-  cd "$srcdir/$pkgname"
-  easy_install-2.7 pyand --prefix $pkgdir
+  export PYTHONPATH="$pkgdir/usr/lib/python2.7/site-packages"
+  cd $srcdir/$pkgname/../
+  mkdir -p $pkgdir/usr/lib/python2.7/site-packages
+  easy_install-2.7 --prefix "$pkgdir/usr" python2-pyand-git
 }
+
