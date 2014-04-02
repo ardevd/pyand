@@ -55,7 +55,7 @@ If you have easy_install for Python-2.7 installed, you can use it to install pya
 
 AUR PKGBUILD
 ----
-There is also an officially supported PKGBUILD available, including in the git repo which I will be uploading to AUR soon. You can install it like any other AUR package.
+There is also an officially supported PKGBUILD available. You can grab the PKGBUILD from the github repo or from the `AUR <https://aur.archlinux.org/packages/python2-pyand-git/>`_. You can install it like any other AUR package.
 
 Credits
 ========
