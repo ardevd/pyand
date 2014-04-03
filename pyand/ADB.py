@@ -199,24 +199,21 @@ class ADB(object):
         #Clear existing list of devices
         self.__devices = None
         self.run_cmd("devices")
+        device_dict =  {}
         if self.__error is not None:
-            return ''
+            return None
         try:
-            device_list = self.__output.partition('\n')[2].replace('device','').split()
-
-            if device_list[1:] == ['no','permissions']:
-                error = 2
-                self.__devices = None
+            n = 0
+            output_list = self.__output.split("\n")
+            for line in output_list:
+                pattern = re.compile(r"([^\s]+)\s+device$")
+                device = pattern.findall(line)
+                if device:
+                    device_dict[n] = device
+                    n += 1
         except:
             self.__devices = None
             error = 1
-        #return (error,self.__devices)
-        i = 0
-        device_dict =  {}
-        for device in device_list:
-            #Add list to dictionary with incrementing ID
-            device_dict[i] = device
-            i += 1
         self.__devices = device_dict
         return self.__devices
 
