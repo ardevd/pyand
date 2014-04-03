@@ -1,3 +1,4 @@
+#!/usr/bin/env python2
 try:
     import sys
     import subprocess
