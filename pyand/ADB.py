@@ -4,7 +4,7 @@
 ####
 # Author: Edvard Holst
 # Project Site: http://github.com/Zyg0te/pyand
-# Version: 0.9.1.2
+# Version: 0.9.1.3
 ###
 
 try:
