@@ -23,6 +23,8 @@ pkgver() {
 package() {
   export PYTHONPATH="$pkgdir/usr/lib/python2.7/site-packages"
   cd "$srcdir/"
+  install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -m755 "${srcdir}/${pkgname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/"
   mkdir -p "$pkgdir/usr/lib/python2.7/site-packages"
   easy_install-2.7 --prefix "$pkgdir/usr" python2-pyand-git
 }
