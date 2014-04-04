@@ -267,7 +267,6 @@ class ADB(object):
         if self.__error is not None:
             return self.__error
         try:
-            print self.__output
             for line in self.__output.split("\n"):
                 if line.startswith(self.__target):
                     pattern = r"model:(.+)\sdevice"
