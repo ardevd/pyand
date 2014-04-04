@@ -94,7 +94,6 @@ class Fastboot(object):
         if self.run_cmd("help") is None:
             print "[-] fastboot executable not found"
             return False
-        print "[+] fastboot executable found"
         return True
 
     def set_fastboot_path(self, fastboot_path):
