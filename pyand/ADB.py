@@ -209,7 +209,7 @@ class ADB(object):
                 pattern = re.compile(r"([^\s]+)\s+device$")
                 device = pattern.findall(line)
                 if device:
-                    device_dict[n] = device
+                    device_dict[n] = device[0]
                     n += 1
         except:
             self.__devices = None
@@ -267,6 +267,7 @@ class ADB(object):
         if self.__error is not None:
             return self.__error
         try:
+            print self.__output
             for line in self.__output.split("\n"):
                 if line.startswith(self.__target):
                     pattern = r"model:(.+)\sdevice"
