@@ -182,6 +182,13 @@ class Fastboot(object):
         else:
             self.run_cmd('flashall')
 
+    def format(self, partition):
+        """
+        Format the specified partition
+        """
+        self.run_cmd('format %s' % partition)
+        return self.__output
+
     def reboot_device(self):
         """
         Reboot the device normally
