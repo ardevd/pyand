@@ -202,3 +202,17 @@ class Fastboot(object):
         """
         self.run_cmd('reboot-bootloader')
         return self.__output
+
+    def oem_unlock(self):
+        """
+        unlock bootloader
+        """
+        self.run_cmd('oem unlock')
+        return self.__output
+
+    def oem_lock(self):
+        """
+        lock bootloader
+        """
+        self.run_cmd('oem lock')
+        return self.__output
