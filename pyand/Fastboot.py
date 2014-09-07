@@ -18,7 +18,8 @@ class Fastboot(object):
 
     def __init__(self, fastboot_path="fastboot"):
         """
-        By default we assume fastboot is in $PATH
+        By default we assume fastboot is in $PATH.
+        Alternatively, the path to fasboot can be supplied.
         """
         self.__fastboot_path = fastboot_path
         if not self.check_path():
