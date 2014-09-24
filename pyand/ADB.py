@@ -13,7 +13,6 @@ try:
     import re
     from os import popen3 as pipe
 except ImportError as e:
-    # should never be reached
     print "[!] Required module missing. %s" % e.args[0]
     sys.exit(-1)
 
@@ -85,7 +84,7 @@ class ADB(object):
 
     def run_cmd(self, cmd):
         """
-        Run a command against adb tool ($ adb <cmd>)
+        Run a command against the adb tool ($ adb <cmd>)
         """
         self.__clean__()
 
