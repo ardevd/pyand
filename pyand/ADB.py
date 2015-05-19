@@ -489,3 +489,7 @@ class ADB(object):
             self.__output = self.__output.strip()
 
         return self.__output
+
+    def wake_device(self):
+        return self.run_cmd('shell input keyevent 26')
+
