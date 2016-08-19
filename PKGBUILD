@@ -1,5 +1,3 @@
-# Maintainer: Edvard Holst <edvard.holst at gmail> 
-
 pkgname=python2-pyand-git
 pkgver=0.9.1
 pkgrel=5
