@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 
 ####
-# Author: Edvard Holst
-# Project Site: http://github.com/Zyg0te/pyand
-# Version: 0.9.1.3
+# Project Site: http://github.com/archpoint/pyand
 ###
 
 try:
