@@ -29,7 +29,7 @@ pyand will eventually let you do pretty much anything you could possibly do with
 
 Requirements 
 =======
-* Linux is currently the only supported operating system. pyand is reported to function at least partially on Windows as well.
+* Linux is currently the only supported operating system. pyand is reported to function on Windows and OSX as well but I havent done extensive testing on those platforms..
 * Python 2.7 is the recommended version of Python as Python 3.x is not currently supported.
 * Fastboot and ADB is also required and should ideally be in your $PATH. If its not in your $PATH you will have to specify the path when you instantiate the object. 
   
