@@ -9,6 +9,7 @@ try:
     import sys
     import subprocess
     import re
+    import platform
     from os import popen3 as pipe
 except ImportError as e:
     print "[!] Required module missing. %s" % e.args[0]
@@ -202,6 +203,10 @@ class ADB(object):
         try:
             n = 0
             output_list = self.__output.split("\n")
+            # Split on \r if we are on Windows
+            if platform.system().lower == "windows":
+                output_list = self.__output.split("\r")
+
             for line in output_list:
                 pattern = re.compile(r"([^\s]+)\s+device$")
                 device = pattern.findall(line)
