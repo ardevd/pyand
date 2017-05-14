@@ -50,7 +50,7 @@ If you have easy_install for Python-2.7 installed, you can use it to install pya
 
 .. code-block::
 
-   $ git clone https://github.com/Zyg0te/pyand
+   $ git clone https://github.com/archpoint/pyand
    $ sudo easy_install-2.7 pyand
 
 
