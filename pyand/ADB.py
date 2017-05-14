@@ -491,3 +491,11 @@ class ADB(object):
     def wake_device(self):
         return self.run_cmd('shell input keyevent 26')
 
+    def sideload(self, otapackage=None):
+        if otapackage is None:
+            return self.__output
+        self.run_cmd("sideload %s" % otapackage)
+        return self.__output
+
+    def get_devpath(self):
+    	return self.run_cmd('get-devpath')
