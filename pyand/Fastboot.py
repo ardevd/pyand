@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+
 try:
     import sys
     import subprocess
@@ -77,7 +78,6 @@ class Fastboot(object):
             args = self.__build_command__(cmd)
             if args is None:
                 return
-            #print 'args>', args
             cmdp = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             self.__output, self.__error = cmdp.communicate()
             retcode = cmdp.wait()
@@ -115,7 +115,7 @@ class Fastboot(object):
         fastboot devices
         """
         error = 0
-        #Clear existing list of devices
+        # Clear existing list of devices
         self.__devices = None
         self.run_cmd("devices")
         if self.__error is not None:
@@ -129,11 +129,10 @@ class Fastboot(object):
         except:
             self.__devices = None
             error = 1
-        #return (error,self.__devices)
         i = 0
         device_dict =  {}
         for device in device_list:
-            #Add list to dictionary with incrementing ID
+            # Add list to dictionary with incrementing ID
             device_dict[i] = device
             i += 1
         self.__devices = device_dict
