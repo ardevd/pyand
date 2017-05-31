@@ -1,10 +1,6 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
-####
-# Project Site: http://github.com/archpoint/pyand
-###
-
 try:
     import sys
     import subprocess
