@@ -1,6 +1,6 @@
 pkgname=python2-pyand-git
-pkgver=0.9.1
-pkgrel=5
+pkgver=1.0.0
+pkgrel=6
 pkgdesc="A Python wrapper library for ADB and Fastboot"
 arch=('any')
 url="https://github.com/ardevd/pyand"
