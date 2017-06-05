@@ -91,11 +91,12 @@ class ADB(object):
             args = self.__build_command__(cmd)
             if args is None:
                 return
-            #Print out args for debug purposes
-            #print 'args>', args
             cmdp = subprocess.Popen(args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             self.__output, self.__error = cmdp.communicate()
             retcode = cmdp.wait()
+            if "device unauthorized" in self.__output:
+                self.__error = "[-] Device unauthorized"
+                return False
             return self.__output.rstrip('\n')
         except OSError, e:
             self.__error = str(e)
@@ -204,7 +205,7 @@ class ADB(object):
                 output_list = self.__output.split("\r")
 
             for line in output_list:
-                pattern = re.compile(r"([^\s]+)\s+device$")
+                pattern = re.compile(r"([^\s]+)\t+.+$")
                 device = pattern.findall(line)
                 if device:
                     device_dict[n] = device[0]
@@ -258,7 +259,7 @@ class ADB(object):
 
     def get_model(self):
         """
-        Get Model name from taget device
+        Get Model name from target device
         """
         self.run_cmd("devices -l")
         device_model = ""
