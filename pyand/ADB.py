@@ -245,7 +245,7 @@ class ADB(object):
         """
         Returns the selected device to work with
         """
-        if self.__target == None:
+        if self.__target is None:
             print "[*] No device target set"
 
         return self.__target
@@ -273,7 +273,7 @@ class ADB(object):
                     device_model = pat.findall(line)
                     device_model = re.sub("[\[\]\'{\}<>]", '', str(device_model))
         except Exception as e:
-            return "[-] Error: %s" %e.args[0]
+            return "[-] Error: %s" % e.args[0]
 
         return device_model
 
@@ -290,7 +290,7 @@ class ADB(object):
         Specify mode to reboot normally, recovery or bootloader
         adb reboot <normally (0)/recovery (1) /bootloader (2)>
         """
-        if not mode in (self.REBOOT_NORMAL, self.REBOOT_RECOVERY,self.REBOOT_BOOTLOADER):
+        if mode not in (self.REBOOT_NORMAL, self.REBOOT_RECOVERY, self.REBOOT_BOOTLOADER):
             self.__error = "mode must be REBOOT_NORMAL/REBOOT_RECOVERY/REBOOT_BOOTLOADER"
             return self.__output
 
@@ -317,23 +317,23 @@ class ADB(object):
         self.run_cmd("remount")
         return self.__output
 
-    def get_remote_file(self,remote,local):
+    def get_remote_file(self, remote, local):
         """
         Pulls a remote file
         adb pull remote local
         """
-        self.run_cmd('pull \"%s\" \"%s\"' % (remote,local) )
+        self.run_cmd('pull \"%s\" \"%s\"' % (remote, local))
         if "bytes in" in self.__error:
             self.__output = self.__error
             self.__error = None
         return self.__output
 
-    def push_local_file(self,local,remote):
+    def push_local_file(self, local, remote):
         """
         Push a local file
         adb push local remote
         """
-        self.run_cmd('push \"%s\" \"%s\"' % (local,remote) )
+        self.run_cmd('push \"%s\" \"%s\"' % (local, remote))
         return self.__output
 
     def shell_command(self,cmd):
