@@ -500,4 +500,4 @@ class ADB(object):
         return self.__output
 
     def get_devpath(self):
-    	return self.run_cmd('get-devpath')
+        return self.run_cmd('get-devpath')
