@@ -15,7 +15,7 @@ Although this documentation describes the most important methods and classes it 
    :maxdepth: 2
    :caption: Contents:
 
-
+   install
 
 Indices and tables
 ==================
