@@ -271,7 +271,7 @@ class ADB(object):
                     pattern = r"model:(.+)\sdevice"
                     pat = re.compile(pattern)
                     device_model = pat.findall(line)
-                    device_model = re.sub("[\[\]\'\{\}<>]", '', str(device_model))
+                    device_model = re.sub("[\[\]\'{\}<>]", '', str(device_model))
         except Exception as e:
             return "[-] Error: %s" %e.args[0]
 
