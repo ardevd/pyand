@@ -31,7 +31,7 @@ class ADB(object):
     DEFAULT_TCP_HOST = "localhost"
 
     def __init__(self, adb_path="adb"):
-        #By default we assume adb is in $PATH
+        # By default we assume adb is in $PATH
         self.__adb_path = adb_path
         if not self.check_path():
             self.__error = "[!] adb path not valid"
@@ -66,7 +66,7 @@ class ADB(object):
         elif type(cmd) is list:
             a = cmd
         else:
-            #All arguments must be single list items
+            # All arguments must be single list items
             a = cmd.split(" ")
 
         a.insert(0, self.__adb_path)
@@ -126,7 +126,7 @@ class ADB(object):
             return False
         return True
 
-    def set_adb_path(self,adb_path):
+    def set_adb_path(self, adb_path):
         """
         Set the ADB tool path
         """
@@ -161,7 +161,7 @@ class ADB(object):
         self.kill_server()
         return self.start_server()
 
-    def restore_file(self,file_name):
+    def restore_file(self, file_name):
         """
         Restore device contents from the <file> backup archive
         adb restore <file>
@@ -191,10 +191,10 @@ class ADB(object):
         adb devices
         """
         error = 0
-        #Clear existing list of devices
+        # Clear existing list of devices
         self.__devices = None
         self.run_cmd("devices")
-        device_dict =  {}
+        device_dict = {}
         if self.__error is not None:
             return None
         try:
@@ -221,7 +221,7 @@ class ADB(object):
         Specify the device name to target
         example: set_target_device('emulator-5554')
         """
-        if device is None or not device in self.__devices.values():
+        if device is None or self.__devices is None or device not in self.__devices.values():
 
             self.__error = 'Must get device list first'
             print "[!] Device not found in device list"
@@ -234,7 +234,7 @@ class ADB(object):
         Specify the device ID to target.
         The ID should be one from the device list.
         """
-        if device is None or not device in self.__devices:
+        if device is None or self.__devices is None or device not in self.__devices:
             self.__error = 'Must get device list first'
             print "[!] Device not found in device list"
             return False
