@@ -19,6 +19,7 @@ Although this documentation describes the most important methods and classes it 
 
    install
    introduction
+   basics
 
 Indices and tables
 ==================
