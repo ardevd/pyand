@@ -22,6 +22,4 @@ Although this documentation describes the most important methods and classes it 
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
