@@ -36,12 +36,11 @@ Requirements
 
 Documentation
 ====
-The Wiki will eventually be a good place to find documentation. 
+The pyand documentation is currently being written. You can find the latest documentation `here <http://pyand.readthedocs.io/en/latest/>`_. 
 
 Installation
 ======
 There are currently two recommended ways of installing pyand.
-
 
 easy_install
 -------
