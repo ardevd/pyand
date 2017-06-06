@@ -13,6 +13,7 @@ pyand is a simple Python library for Python 2.7 that allows you to easily work w
 Although this documentation describes the most important methods and classes it is not a complete API reference. 
 
 .. toctree::
+   :numbered:
    :maxdepth: 2
    :caption: Contents:
 
