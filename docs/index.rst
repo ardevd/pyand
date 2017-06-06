@@ -11,6 +11,7 @@ pyand: Interface with adb and fastboot in Python
 pyand is a simple Python library for Python 2.7 that allows you to easily work with adb and fastboot connected Android devices. Usage is pretty simple and should be intuitive for anyone familiar with Python as well as adb and fastboot.
 
 Although this documentation describes the most important methods and classes it is not a complete API reference. 
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
