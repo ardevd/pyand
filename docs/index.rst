@@ -18,6 +18,7 @@ Although this documentation describes the most important methods and classes it 
    :caption: Contents:
 
    install
+   introduction
 
 Indices and tables
 ==================
