@@ -7,6 +7,7 @@ Simple Example
 --------------
 
 pyand exposes two classes. ADB and Fastboot. Usage is simple and to verify that everything is set up correctly we can import ADB and Fastboot and check for connected devices::
+    .. code-block:: python
 
      >>> from pyand import ADB, Fastboot
      >>> adb = ADB()
@@ -22,7 +23,6 @@ pyand exposes two classes. ADB and Fastboot. Usage is simple and to verify that 
      >>> fb = Fastboot()
      >>> fb.get_devices()
      {0: 'abc1951124de1241'}
-     ...
 
 To start we have to import the ADB and Fastboot classes to be able to access the associated methods. As long as the ADB and Fastboot binaries are in your $PATH the above example should work. Otherwise you will have to specify the path to binary when instantiating the object.::
 
