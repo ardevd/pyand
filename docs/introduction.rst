@@ -8,8 +8,6 @@ Simple Example
 
 pyand exposes two classes. ADB and Fastboot. Usage is simple and to verify that everything is set up correctly we can import ADB and Fastboot and check for connected devices::
 
-    .. code-block:: python
-
      >>> from pyand import ADB, Fastboot
      >>> adb = ADB()
      >>> adb.get_devices()
