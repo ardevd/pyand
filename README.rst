@@ -32,7 +32,7 @@ Requirements
 * Python 2.7 is the recommended version of Python as Python 3.x is not currently supported.
 * Fastboot and ADB is also required and should ideally be in your $PATH. If its not in your $PATH you will have to specify the path when you instantiate the object. 
   
-    * `The Android SDK <https://developer.android.com/sdk/index.html>`_ is a good way of getting a hold of up-to-date binaries.
+`The Android SDK <https://developer.android.com/sdk/index.html>`_ is a good way of getting a hold of up-to-date binaries.
 
 Documentation
 ====
